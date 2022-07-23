@@ -5,10 +5,10 @@ using UnityEngine;
 public class FPSControllerCrouchingState : State
 {
     private FPSControllerFSM _stateMachine;
-    private FPSController _controller;
+    private PlayerCharacter _controller;
 
 
-    public FPSControllerCrouchingState(FPSControllerFSM stateMachine, FPSController controller)
+    public FPSControllerCrouchingState(FPSControllerFSM stateMachine, PlayerCharacter controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;

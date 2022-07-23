@@ -7,17 +7,13 @@ using UnityEngine;
 public class FPSSliding : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private Transform _camera;
+    [SerializeField] private Transform _cameraPosition;
     [SerializeField] private CapsuleCollider _capsuleCollider;
+    [SerializeField] private FPSMovementData _data;
 
     private FPSMovement _fpsMovement;
     private Rigidbody _rb;
 
-    [Header("Sliding")]
-    [SerializeField] private float _maxSlideTime = .75f;
-    [SerializeField] private float _slideForce = 200;
-    [SerializeField][Range(.1f, .9f)]
-    private float _crouchYScale = .5f;
     // crouch repositioners
     private Vector3 _cameraStartPosition;
     private float _startingColliderHeight;
@@ -80,21 +76,21 @@ public class FPSSliding : MonoBehaviour
             + (transform.right * _xInput);
 
         // sliding normal
-        if(_fpsMovement.OnSlope == false || _rb.velocity.y > -.1f)
+        if(_fpsMovement.IsOnSlope == false || _rb.velocity.y > -.1f)
         {
-            _rb.AddForce(inputDirection.normalized * _slideForce, ForceMode.Force);
+            _rb.AddForce(inputDirection.normalized * _data.SlideForce, ForceMode.Force);
             _elapsedSlideTime += Time.deltaTime;
         }
         // sliding down a slope
         else
         {
             _rb.AddForce(_fpsMovement.GetSlopeMoveDirection(inputDirection) 
-                * _slideForce, ForceMode.Force);
+                * _data.SlideForce, ForceMode.Force);
 
         }
 
 
-        if (_elapsedSlideTime >= _maxSlideTime)
+        if (_elapsedSlideTime >= _data.MaxSlideTime)
         {
             StopSlide();
         }
@@ -109,20 +105,20 @@ public class FPSSliding : MonoBehaviour
 
     private void StorePositionsForSlide()
     {
-        _cameraStartPosition = _camera.transform.position;
+        _cameraStartPosition = _cameraPosition.transform.position;
         _startingColliderHeight = _capsuleCollider.height;
         _startingColliderCenter = _capsuleCollider.center;
-        _crouchCameraYAdjust = _camera.transform.position.y * _crouchYScale;
-        _crouchColliderHeightAdjust = (_capsuleCollider.height * _crouchYScale) / 2;
-        _crouchColliderCenterAdjust = (_capsuleCollider.center.y * _crouchYScale) / 2;
+        _crouchCameraYAdjust = _cameraPosition.transform.position.y * _data.CrouchYScale;
+        _crouchColliderHeightAdjust = (_capsuleCollider.height * _data.CrouchYScale) / 2;
+        _crouchColliderCenterAdjust = (_capsuleCollider.center.y * _data.CrouchYScale) / 2;
     }
 
     private void ReducePlayerHeight()
     {
-        _camera.transform.position = new Vector3(
-            _camera.transform.position.x,
-            _camera.transform.position.y - _crouchCameraYAdjust,
-            _camera.transform.position.z
+        _cameraPosition.transform.position = new Vector3(
+            _cameraPosition.transform.position.x,
+            _cameraPosition.transform.position.y - _crouchCameraYAdjust,
+            _cameraPosition.transform.position.z
         );
         // since we're repositioning from the center we move by half height and scale
         _capsuleCollider.height = _startingColliderHeight - _crouchColliderHeightAdjust;
@@ -132,10 +128,10 @@ public class FPSSliding : MonoBehaviour
 
     private void ReturnPlayerHeight()
     {
-        _camera.transform.position = new Vector3(
-            _camera.transform.position.x,
-            _camera.transform.position.y + _crouchCameraYAdjust,
-            _camera.transform.position.z
+        _cameraPosition.transform.position = new Vector3(
+            _cameraPosition.transform.position.x,
+            _cameraPosition.transform.position.y + _crouchCameraYAdjust,
+            _cameraPosition.transform.position.z
         );
         // since we're repositioning from the center we move by half height and scale
         _capsuleCollider.height = _startingColliderHeight;

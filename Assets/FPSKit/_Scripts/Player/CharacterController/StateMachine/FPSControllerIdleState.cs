@@ -5,10 +5,10 @@ using UnityEngine;
 public class FPSControllerIdleState : State
 {
     private FPSControllerFSM _stateMachine;
-    private FPSController _controller;
+    private PlayerCharacter _controller;
     
 
-    public FPSControllerIdleState(FPSControllerFSM stateMachine, FPSController controller)
+    public FPSControllerIdleState(FPSControllerFSM stateMachine, PlayerCharacter controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;

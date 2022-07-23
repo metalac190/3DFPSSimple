@@ -5,10 +5,10 @@ using UnityEngine;
 public class FPSControllerWallRunningState : State
 {
     private FPSControllerFSM _stateMachine;
-    private FPSController _controller;
+    private PlayerCharacter _controller;
 
 
-    public FPSControllerWallRunningState(FPSControllerFSM stateMachine, FPSController controller)
+    public FPSControllerWallRunningState(FPSControllerFSM stateMachine, PlayerCharacter controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;

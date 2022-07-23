@@ -5,10 +5,10 @@ using UnityEngine;
 public class FPSControllerSlidingState : State
 {
     private FPSControllerFSM _stateMachine;
-    private FPSController _controller;
+    private PlayerCharacter _controller;
 
 
-    public FPSControllerSlidingState(FPSControllerFSM stateMachine, FPSController controller)
+    public FPSControllerSlidingState(FPSControllerFSM stateMachine, PlayerCharacter controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;

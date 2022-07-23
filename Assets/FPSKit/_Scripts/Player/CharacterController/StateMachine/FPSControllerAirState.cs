@@ -5,10 +5,10 @@ using UnityEngine;
 public class FPSControllerAirState : State
 {
     private FPSControllerFSM _stateMachine;
-    private FPSController _controller;
+    private PlayerCharacter _controller;
 
 
-    public FPSControllerAirState(FPSControllerFSM stateMachine, FPSController controller)
+    public FPSControllerAirState(FPSControllerFSM stateMachine, PlayerCharacter controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(FPSController))]
+[RequireComponent(typeof(PlayerCharacter))]
 public class FPSControllerFSM : StateMachineMB
 {
-    private FPSController _controller;
+    private PlayerCharacter _controller;
 
     public FPSControllerIdleState IdleState { get; private set; }
     public FPSControllerWalkingState WalkingState { get; private set; }
@@ -18,7 +18,7 @@ public class FPSControllerFSM : StateMachineMB
     private void Awake()
     {
         // dependencies
-        _controller = GetComponent<FPSController>();
+        _controller = GetComponent<PlayerCharacter>();
         // states
         IdleState = new FPSControllerIdleState(this, _controller);
         WalkingState = new FPSControllerWalkingState(this, _controller);

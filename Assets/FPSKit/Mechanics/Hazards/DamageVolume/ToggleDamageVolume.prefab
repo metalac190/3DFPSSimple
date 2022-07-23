@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8023929192452389107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8023929192452389105}
+  - component: {fileID: 8023929192452389104}
+  m_Layer: 0
+  m_Name: ToggleDamageVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8023929192452389105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8023929192452389107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.73, y: 2.57, z: 19.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3862457290502404600}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8023929192452389104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8023929192452389107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28558831053c74429c371eaa503b991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToggleA:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3862457290502404603}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  ToggleB:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3862457290502404603}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _startOffsetDuration: 0
+  _aDuration: 1.5
+  _bDuration: 1.5
+--- !u!1001 &3646181246956389027
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8023929192452389105}
+    m_Modifications:
+    - target: {fileID: 505497136147053400, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_Name
+      value: DamageVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+--- !u!4 &3862457290502404600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 505497136147053403, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+  m_PrefabInstance: {fileID: 3646181246956389027}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3862457290502404603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 505497136147053400, guid: 1eb655d69211d334380447af5eedb460, type: 3}
+  m_PrefabInstance: {fileID: 3646181246956389027}
+  m_PrefabAsset: {fileID: 0}

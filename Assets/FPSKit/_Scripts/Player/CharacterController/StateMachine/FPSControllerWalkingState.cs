@@ -5,10 +5,10 @@ using UnityEngine;
 public class FPSControllerWalkingState : State
 {
     private FPSControllerFSM _stateMachine;
-    private FPSController _controller;
+    private PlayerCharacter _controller;
 
     public FPSControllerWalkingState(FPSControllerFSM stateMachine,
-        FPSController controller)
+        PlayerCharacter controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;
