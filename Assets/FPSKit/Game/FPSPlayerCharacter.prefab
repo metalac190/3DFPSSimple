@@ -341,6 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _max: 10
   _current: 10
+  _hasInfiniteHealth: 0
   _isDamageable: 1
   _hitInvulDuration: 0.5
   Damaged:

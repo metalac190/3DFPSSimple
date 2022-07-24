@@ -38,7 +38,11 @@ public class Blaster : Weapon
     private void ApplyHit(RaycastHit hitInfo)
     {
         // test hitInfo if we should apply damage
-
+        Health health = hitInfo.collider.gameObject.GetComponent<Health>();
+        if(health != null)
+        {
+            health.Damage(Damage);
+        }
         // otherwise just apply impact effects
         if(_impactParticlePrefab != null)
         {

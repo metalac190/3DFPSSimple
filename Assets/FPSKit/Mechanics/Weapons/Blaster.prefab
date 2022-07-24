@@ -584,7 +584,7 @@ MonoBehaviour:
   _shootDistance: 100
   _shootableLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 961
   _impactParticlePrefab: {fileID: 2010415367784037018, guid: d3d2881bf74a2d94188d85e3b8facd09, type: 3}
 --- !u!1 &5014383094798592507
 GameObject:

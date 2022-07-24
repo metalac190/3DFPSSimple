@@ -26,12 +26,12 @@ public class HitFlash3D
     private Coroutine _flashRoutine = null;
 
     public HitFlash3D(MonoBehaviour monobehaviour, MeshRenderer renderer,
-        Color flashColor, float flashDuration)
+        Color flashColor, float flashDuration = .15f)
     {
         _monobehaviour = monobehaviour;
         _renderer = renderer;
         _flashColor = flashColor;
-        _startingColor = _renderer.material.color;
+        _startingColor = _renderer.material.GetColor("_EmissionColor");
 
         CalculateFlashBlends(flashDuration);
     }
@@ -83,11 +83,12 @@ public class HitFlash3D
     IEnumerator FlashRoutine(Color flashColor, float flashInDuration, 
         float flashHoldDuration, float flashOutDuration)
     {
+        _renderer.material.EnableKeyword("_EMISSION");
         // flash in
         for (float elapsed = 0; elapsed <= flashInDuration; elapsed += Time.deltaTime)
         {
             Color newColor = Color.Lerp(_startingColor, flashColor, elapsed / flashInDuration);
-            _renderer.material.SetColor("_Color", newColor);
+            _renderer.material.SetColor("_EmissionColor", newColor);
             yield return null;
         }
         // hold
@@ -96,15 +97,16 @@ public class HitFlash3D
         for (float elapsed = 0; elapsed <= flashOutDuration; elapsed += Time.deltaTime)
         {
             Color newColor = Color.Lerp(flashColor, _startingColor, elapsed / flashOutDuration);
-            _renderer.material.SetColor("_Color", newColor);
+            _renderer.material.SetColor("_EmissionColor", newColor);
             yield return null;
         }
-        _renderer.material.SetColor("_Color", _startingColor);
+        SetInitialValues();
     }
 
     private void SetInitialValues()
     {
-        _renderer.material.SetColor("_Color", _startingColor);
+        _renderer.material.SetColor("_EmissionColor", _startingColor);
+        _renderer.material.DisableKeyword("_EMISSION");
     }
 
     #endregion

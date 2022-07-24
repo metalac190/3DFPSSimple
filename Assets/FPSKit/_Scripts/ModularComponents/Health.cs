@@ -11,7 +11,13 @@ public class Health : MonoBehaviour
     [Header("Health")]
     [SerializeField] private int _max = 10;
     [SerializeField] private int _current = 10;
-    [SerializeField] private bool _isDamageable = true;
+    [SerializeField] [Tooltip("Sometimes we want to be able to hit things but we want them" +
+        " to not actually take damage. Use this to receive hits but not subtract health")]
+    private bool _hasInfiniteHealth = false;
+    [SerializeField]
+    [Tooltip("If this object has health but we don't want to damage it or receive hits at certain" +
+        " points, use this")]
+    private bool _isDamageable = true;
     [SerializeField] private float _hitInvulDuration = .5f;
 
     public UnityEvent<int> Damaged;
@@ -48,7 +54,21 @@ public class Health : MonoBehaviour
         }
     }
 
-    public float HitInvulDuration => _hitInvulDuration;
+    public bool HasInfiniteHealth 
+    {
+        get => _hasInfiniteHealth;
+        set { _hasInfiniteHealth = value; } 
+    }
+
+    public float HitInvulDuration
+    {
+        get => _hitInvulDuration;
+        set
+        {
+            Math.Abs(value);
+            _hitInvulDuration = value;
+        }
+    } 
     public bool IsHitInvul { get; private set; } = false;
 
     public virtual void Heal(int amount)
@@ -60,8 +80,12 @@ public class Health : MonoBehaviour
     {
         if (!_isDamageable) return;
         if (IsHitInvul) return;
-
-        Current -= amount;
+        // only subtract health if we don't have 'infinite'
+        if(HasInfiniteHealth == false)
+        {
+            Current -= amount;
+        }
+        // either way, send damaged event
         Damaged?.Invoke(amount);
         Debug.Log("Damaged. New Health " + Current);
         Current = Mathf.Clamp(Current, 0, _max);

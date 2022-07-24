@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   _walkSpeed: 7
   _sprintSpeed: 10
   _groundDrag: 5
@@ -34,7 +34,7 @@ MonoBehaviour:
   _maxSlopeAngle: 50
   _wallLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   _wallCheckDistance: 1
   _minJumpHeight: 0.5
   _wallRunSpeed: 8.5
