@@ -24,6 +24,7 @@ public class HitFlash3D
 
     private Color _startingColor;
     private Coroutine _flashRoutine = null;
+    private bool _initialUseEmission = false;
 
     public HitFlash3D(MonoBehaviour monobehaviour, MeshRenderer renderer,
         Color flashColor, float flashDuration = .15f)

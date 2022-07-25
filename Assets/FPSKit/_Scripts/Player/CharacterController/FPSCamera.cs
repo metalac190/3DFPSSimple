@@ -7,7 +7,6 @@ using UnityEngine;
 /// https://www.youtube.com/watch?v=f473C43s8nE&t=390s&ab_channel=Dave%2FGameDevelopment
 /// </summary>
 
-[RequireComponent(typeof(Camera))]
 public class FPSCamera : MonoBehaviour
 {
     [Header("Camera Settings")]
@@ -18,15 +17,19 @@ public class FPSCamera : MonoBehaviour
     [SerializeField] private Transform _playerBody;
     [SerializeField] private Transform _cameraPositioner;   // this is the parent object above camera
 
-    private Camera _camera;
+    private CameraController _cameraController;
     private float _xRotation;
 
     public float InitialFOV { get; private set; }
 
     private void Awake()
     {
-        _camera = GetComponent<Camera>();
-        InitialFOV = _camera.fieldOfView;
+        _cameraController = FindObjectOfType<CameraController>();
+        _cameraController.transform.position = _cameraPositioner.position;
+        _cameraController.transform.rotation = _cameraPositioner.rotation;
+        _cameraController.transform.SetParent(_cameraPositioner);
+
+        InitialFOV = _cameraController.Camera.fieldOfView;
         // initial camera rotation
         _xRotation = _cameraPositioner.rotation.x;
     }
@@ -48,7 +51,7 @@ public class FPSCamera : MonoBehaviour
         // ensure we can't look past straight up or straight down
         _xRotation = Mathf.Clamp(_xRotation, -_verticalClampDegrees, _verticalClampDegrees);
         // rotation camera up/down
-        _cameraPositioner.localRotation = Quaternion.Euler(_xRotation, 0, 0);
+        transform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
         // rotate player left/right
         _playerBody.Rotate(Vector3.up * xInput);
     }
@@ -56,16 +59,16 @@ public class FPSCamera : MonoBehaviour
     public void ChangeFOV(float newFOV)
     {
         //TODO smooth
-        _camera.fieldOfView = newFOV;
+        _cameraController.Camera.fieldOfView = newFOV;
     }
 
     public void Tilt(float zTiltAdjust)
     {
-        transform.Rotate(new Vector3 (0, 0, zTiltAdjust));
+        _cameraController.Camera.transform.Rotate(new Vector3 (0, 0, zTiltAdjust));
     }
 
     public void ResetTilt()
     {
-        transform.localRotation = Quaternion.Euler(0, 0, 0);
+        _cameraController.Camera.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 }

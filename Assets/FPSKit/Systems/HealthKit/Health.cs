@@ -87,7 +87,7 @@ public class Health : MonoBehaviour
         }
         // either way, send damaged event
         Damaged?.Invoke(amount);
-        Debug.Log("Damaged. New Health " + Current);
+        //Debug.Log("Damaged. New Health " + Current);
         Current = Mathf.Clamp(Current, 0, _max);
         // start hit invulnerability
         IsHitInvul = true;

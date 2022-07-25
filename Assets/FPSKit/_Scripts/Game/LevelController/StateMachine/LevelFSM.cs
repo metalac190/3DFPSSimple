@@ -55,7 +55,6 @@ public class LevelFSM : StateMachineMB
     {
         Debug.Log("Player Spawned");
         // turn off world camera - FPS player has one built in!
-        _cameraController.gameObject.SetActive(false);
 
         playerCharacter.Health.Died.AddListener(OnPlayerDeath);
     }
@@ -64,14 +63,14 @@ public class LevelFSM : StateMachineMB
     {
         Debug.Log("Player Removed");
         // reenable our world camera
-        _cameraController.gameObject.SetActive(true);
-        _cameraController.FollowNewTarget(playerCharacter.transform);
+        _cameraController.transform.SetParent(null);
     }
 
     private void OnPlayerDeath(GameObject deathObject)
     {
         _gameSession.LastDeathPosition = deathObject.transform.position;
-        _cameraController.gameObject.SetActive(true);
+        _cameraController.transform.SetParent(null);
+        _cameraController.UseOffset = true;
         _cameraController.FollowNewTarget(deathObject.transform);
     }
 }

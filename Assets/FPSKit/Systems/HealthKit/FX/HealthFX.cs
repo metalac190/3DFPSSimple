@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Effects play on objects that take damage
 /// </summary>
+
 public class HealthFX : MonoBehaviour
 {
     [Header("Dependencies")]
@@ -62,7 +63,7 @@ public class HealthFX : MonoBehaviour
                 (_particleScale, _particleScale, _particleScale);
         }
         if (_hitSound != null)
-            AudioHelper.PlayClip3D(_hitSound, transform.position, 1);
+            PlayClip3D(_hitSound, transform.position, 1);
     }
 
     private void PlayDiedFX(GameObject deathObject)
@@ -75,6 +76,26 @@ public class HealthFX : MonoBehaviour
                 (_particleScale, _particleScale, _particleScale);
         }
         if (_destroySound != null)
-            AudioHelper.PlayClip3D(_destroySound, deathObject.transform.position, 1);
+            PlayClip3D(_destroySound, deathObject.transform.position, 1);
+    }
+
+    private AudioSource PlayClip3D(AudioClip clip, Vector3 position,
+        float volume = 1, float pitchRange = .03f)
+    {
+        pitchRange = Mathf.Clamp(pitchRange, 0, 1);
+        // create
+        GameObject audioObject = new GameObject("3DAudio");
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        //configure
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+        audioSource.pitch = 1 + Random.Range(-pitchRange, pitchRange);
+        audioSource.spatialBlend = 1;
+        audioObject.transform.position = position;
+        // activate
+        audioSource.Play();
+        Object.Destroy(audioObject, clip.length);
+        // return in case the caller wants to do other things
+        return audioSource;
     }
 }
