@@ -25,6 +25,8 @@ public class HitFlash3D
     private Color _startingColor;
     private Coroutine _flashRoutine = null;
     private bool _initialUseEmission = false;
+    private const string UseEmissionPropertyName = "_EMISSION";
+    private const string EmissionColorPropertyName = "_EmissionColor";
 
     public HitFlash3D(MonoBehaviour monobehaviour, MeshRenderer renderer,
         Color flashColor, float flashDuration = .15f)
@@ -32,9 +34,11 @@ public class HitFlash3D
         _monobehaviour = monobehaviour;
         _renderer = renderer;
         _flashColor = flashColor;
-        _startingColor = _renderer.material.GetColor("_EmissionColor");
+        _startingColor = _renderer.material.GetColor(EmissionColorPropertyName);
 
         CalculateFlashBlends(flashDuration);
+
+        _initialUseEmission = FindInitialEmissiveState(renderer, UseEmissionPropertyName);
     }
 
     private void CalculateFlashBlends(float flashDuration)
@@ -84,12 +88,12 @@ public class HitFlash3D
     IEnumerator FlashRoutine(Color flashColor, float flashInDuration, 
         float flashHoldDuration, float flashOutDuration)
     {
-        _renderer.material.EnableKeyword("_EMISSION");
+        _renderer.material.EnableKeyword(UseEmissionPropertyName);
         // flash in
         for (float elapsed = 0; elapsed <= flashInDuration; elapsed += Time.deltaTime)
         {
             Color newColor = Color.Lerp(_startingColor, flashColor, elapsed / flashInDuration);
-            _renderer.material.SetColor("_EmissionColor", newColor);
+            _renderer.material.SetColor(EmissionColorPropertyName, newColor);
             yield return null;
         }
         // hold
@@ -98,7 +102,7 @@ public class HitFlash3D
         for (float elapsed = 0; elapsed <= flashOutDuration; elapsed += Time.deltaTime)
         {
             Color newColor = Color.Lerp(flashColor, _startingColor, elapsed / flashOutDuration);
-            _renderer.material.SetColor("_EmissionColor", newColor);
+            _renderer.material.SetColor(EmissionColorPropertyName, newColor);
             yield return null;
         }
         SetInitialValues();
@@ -106,8 +110,23 @@ public class HitFlash3D
 
     private void SetInitialValues()
     {
-        _renderer.material.SetColor("_EmissionColor", _startingColor);
-        _renderer.material.DisableKeyword("_EMISSION");
+        _renderer.material.SetColor(EmissionColorPropertyName, _startingColor);
+        // if we weren't using emission before the flash, turn it back off
+        if(_initialUseEmission == false)
+            _renderer.material.DisableKeyword(UseEmissionPropertyName);
+    }
+
+    private bool FindInitialEmissiveState(MeshRenderer renderer, string keywordName)
+    {
+        foreach(var localKeyword in renderer.material.enabledKeywords)
+        {
+            if(localKeyword.name == keywordName)
+            {
+                return true;
+            }
+        }
+        // if we didn't find it, return false
+        return false;
     }
 
     #endregion
