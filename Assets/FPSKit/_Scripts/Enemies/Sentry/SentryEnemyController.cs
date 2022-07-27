@@ -19,18 +19,26 @@ public class SentryEnemyController : MonoBehaviour
 
     [Header("Projectiles")]
     [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private Transform _projectileSpawnPoint;
     [SerializeField] private int _damage = 3;
     [SerializeField]
     [Tooltip("Number of projectiles fired per second")]
     private float _fireRate = 1;
     [SerializeField]
-    [Range(0, 1)] [Tooltip("Closer to 1 is perfect line, Closer to 0 is wide cone")]
-    private float _accuracy = .75f;
+    //[Range(0, 1)] [Tooltip("Closer to 1 is perfect line, Closer to 0 is wide cone")]
+    //private float _accuracy = .75f;
 
     public Projectile ProjectilePrefab => _projectilePrefab;
     public int Damage => _damage;
     public float FireRate => _fireRate;
-    public float Accuracy => _accuracy;
+    //public float Accuracy => _accuracy;
+
+    [Header("Projectile FX")]
+    [SerializeField] private ParticleSystem _fireParticles;
+    [SerializeField] private AudioClip _fireSound;
+    public ParticleSystem FireParticles => _fireParticles;
+    public AudioClip FireSound => _fireSound;
+
 
     [Header("Dependencies")]
     [SerializeField] private PlayerDetector _playerDetector;
@@ -51,5 +59,20 @@ public class SentryEnemyController : MonoBehaviour
     private void Awake()
     {
         StartingPosition = transform.position;
+    }
+
+    public void Shoot()
+    {
+        // fire projectile
+        Projectile projectile = Instantiate
+            (_projectilePrefab, _projectileSpawnPoint.position, _projectileSpawnPoint.rotation);
+        projectile.Damage = _damage;
+        //TODO implement accuracy
+        // particles
+        if (_fireParticles != null)
+            Instantiate(_fireParticles, _projectileSpawnPoint.position, _projectileSpawnPoint.rotation);
+        // audio
+        if (_fireSound != null)
+            AudioHelper.PlayClip3D(_fireSound, _projectileSpawnPoint.position);
     }
 }

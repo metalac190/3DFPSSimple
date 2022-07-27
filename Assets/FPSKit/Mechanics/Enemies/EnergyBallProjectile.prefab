@@ -82,7 +82,7 @@ MonoBehaviour:
   _layersDetected:
     serializedVersion: 2
     m_Bits: 449
-  _speed: 8
+  _speed: 10
   _destroyAfterSeconds: 4
   _explodeParticles: {fileID: 653273450618745292, guid: 52e9b6bb868ab5b4a8df722e46c59ab0, type: 3}
   _explodeSound: {fileID: 8300000, guid: cb806ff46f9241744b24e53bf944397f, type: 3}

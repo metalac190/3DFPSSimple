@@ -7,27 +7,17 @@ public class PlatformCarryZone : MonoBehaviour
     [SerializeField]
     private Transform _parentObject;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        /*
-        MovementKM movement = collision.gameObject.GetComponent<MovementKM>();
-        if (movement != null)
-        {
-            _passengers.Add(movement);
-        }
-        */
+        Debug.Log("Carry");
+
         collision.transform.SetParent(_parentObject);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
-        /*
-        MovementKM movement = collision.gameObject.GetComponent<MovementKM>();
-        if (movement != null)
-        {
-            _passengers.Remove(movement);
-        }
-        */
+        Debug.Log("Drop");
+
         collision.transform.SetParent(null);
     }
 }
