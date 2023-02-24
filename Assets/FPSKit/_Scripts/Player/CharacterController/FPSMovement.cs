@@ -289,10 +289,10 @@ public class FPSMovement : MonoBehaviour, IPushable
 
     private void StorePositionsForCrouch()
     {
-        _cameraStartPosition = _cameraPositioner.transform.position;
+        _cameraStartPosition = _cameraPositioner.transform.localPosition;
         _startingColliderHeight = _capsuleCollider.height;
         _startingColliderCenter = _capsuleCollider.center;
-        _crouchCameraYAdjust = _cameraPositioner.transform.position.y * Data.CrouchYScale;
+        _crouchCameraYAdjust = _cameraPositioner.transform.localPosition.y * Data.CrouchYScale;
         _crouchColliderHeightAdjust = (_capsuleCollider.height * Data.CrouchYScale) / 2;
         _crouchColliderCenterAdjust = (_capsuleCollider.center.y * Data.CrouchYScale) / 2;
     }
