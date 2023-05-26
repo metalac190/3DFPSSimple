@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FPSKit/Scenes/AssetShowcase.unity
+    guid: f40ba10b62a9f284baf75302b4b19ea0
   m_configObjects: {}
